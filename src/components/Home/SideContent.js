@@ -14,7 +14,7 @@ const SideContent = props => {
     const { classes } = props
 
     return(
-        <div>
+        <div className={classes.root}>
             <Grid container sm={3}>
                 <Grid item sm={3}>
                     Oi

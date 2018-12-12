@@ -4,17 +4,19 @@ import { BrowserRouter, Switch, Route} from 'react-router-dom'
 import './App.css'
 
 import Home from './pages/Home'
-import AbrirAlbum from './pages/AbrirAlbum'
-import PainelAdmin from './pages/PainelAdmin'
+import HomeAdmin from './pages/HomeAdmin'
+import Login from './pages/Login'
+
+import history from './history'
 
 export default class App extends Component {
   render() {
     return (
-      <BrowserRouter>
+      <BrowserRouter history={history}>
         <Switch>
           <Route path="/" exact component={Home} />
-          <Route path="/openalbum" component={AbrirAlbum} />
-          <Route path="/paineladmin" component={PainelAdmin} />
+          <Route path="/login" component={Login} />
+          <Route path="/homeadmin" component={HomeAdmin} />
         </Switch>
       </BrowserRouter>
     )

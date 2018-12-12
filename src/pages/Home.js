@@ -1,9 +1,7 @@
 import React from 'react';
 
-import { firebase } from '../services/Firebase'
-
 import { withStyles } from '@material-ui/core/styles'
-import { Grid, Button } from '@material-ui/core'
+import { Grid } from '@material-ui/core'
 
 import Header from '../components/Home/Header'
 import Content from '../components/Home/Content'
@@ -20,16 +18,12 @@ const styles = theme => ({
   }
 })
 
-const criausuario = () => {
-  firebase.auth().createUserWithEmailAndPassword('patrick-lorran@gmail.com', '123456')
-}
 
 function Home(props) {
   const { classes } = props
 
   return(
     <div className={classes.root}>
-      <Button onClick={criausuario}></Button>
       <Grid className={classes.Destaque} item xs={12}>
         <Header />
       </Grid>

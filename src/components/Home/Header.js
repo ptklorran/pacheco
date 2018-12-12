@@ -51,7 +51,7 @@ const Header = props => {
                             Bonsai Produções
                         </Typography>
 
-                        <IconButton href="/paineladmin">
+                        <IconButton href="/homeadmin">
                             <MenuIcon className={classes.MenuIcon} />
                         </IconButton>
                     </Toolbar>
