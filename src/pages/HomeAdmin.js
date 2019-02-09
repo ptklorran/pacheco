@@ -1,31 +1,85 @@
-import React from 'react'
+import React, { Component } from 'react'
 
-import { Grid } from '@material-ui/core'
+import { withStyles } from '@material-ui/core/styles'
+import { Grid, Button } from '@material-ui/core'
 
-import Header from '../components/HomeAdmin/Header'
-import Content from '../components/HomeAdmin/Content'
-import Footer from '../components/Footer'
+import { auth } from '../services/Firebase'
 
-class PainelAdmin extends React.Component {
-    render() {
-        return(
-            <div>
-                <Grid container xs={12} sm={12}>
-                    <Grid item xs={12} sm={12}>
-                        <Header />
-                    </Grid>
+//importação dos componentes da HomeAdmin, path: src/components/HomeAdmin/*
+import Principal from '../components/HomeAdmin/Principal'
+import NovoUsuario from '../components/HomeAdmin/NovoUsuario'
+import EnviarSlider from '../components/HomeAdmin/EnviarSlider'
 
-                    <Grid item xs={12} sm={12}>
-                        <Content />
-                    </Grid>
-                    
-                    <Grid item xs={12} sm={12}>
-                        <Footer />
-                    </Grid>
-                </Grid>
-            </div>
-        )
+const styles = theme => ({
+  root: {
+    width: '100%',
+    minHeight: '100vh',
+    position: 'absolute',
+    backgroundImage: 'linear-gradient(90deg, #0f0c29, #302b63, #24243e )'
+  },
+  options: {
+    display: 'flex',
+    width: '100%',
+    flexDirection: 'row',
+    justifyContent: 'center'
+  }
+})
+
+class HomeAdmin extends Component {
+  state = {
+    openEnviarSlider: false,
+    openNovoUsuario: false,
+    logado: false
+  }
+
+  componentDidMount() {
+    auth.onAuthStateChanged(
+      (user) => {
+        if (user) {
+          this.setState({logado: true, email: user.email})
+        } else {
+          this.props.history.push('/login')
+        }
+      }
+    )
+  }
+
+  render() {
+
+    const { classes } = this.props
+    const { email } = this.state
+
+    const fecharEnviarSlider = () => {
+      this.setState({ openEnviarSlider: false })
     }
+
+    const fecharNovoUsuario = () => {
+      this.setState({ openNovoUsuario: false })
+    }
+
+    return (
+      <div className={classes.root}>
+        <Grid>
+          <div className={classes.options}>
+            <Button onClick={() => {}} style={{ color: '#fff' }}>Usuário: {email}</Button>
+          </div>
+          <div className={classes.options}>
+            <Button onClick={() => this.props.history.push('/')} style={{ color: '#fff' }}>Início</Button>
+            <Button onClick={() => this.setState({ openEnviarSlider: true })} style={{ color: '#fff' }}>Banners</Button>
+            <Button onClick={() => this.setState({ openAlbuns: true })} style={{ color: '#fff' }}>Albuns</Button>
+            <Button onClick={() => this.setState({ openNovoUsuario: true })} style={{ color: '#fff' }}>Usuários</Button>
+            <Button onClick={() => {auth.signOut(); this.props.history.push('/')}} style={{ color: '#fff' }}>Sair</Button>
+          </div>
+        </Grid>
+        <Grid>
+          <Principal />
+        </Grid>
+
+        <EnviarSlider open={this.state.openEnviarSlider} fecharEnviarSlider={fecharEnviarSlider} />
+        <NovoUsuario open={this.state.openNovoUsuario} fecharNovoUsuario={fecharNovoUsuario} />
+      </div>
+    )
+  }
 }
 
-export default PainelAdmin
+export default withStyles(styles)(HomeAdmin)

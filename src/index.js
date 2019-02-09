@@ -1,5 +1,23 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import App from './App';
+import Router from './Router';
 
-ReactDOM.render(<App />, document.getElementById('root'));
+import { createMuiTheme, MuiThemeProvider } from '@material-ui/core/styles'
+
+const theme = createMuiTheme({
+    typography: {
+        useNextVariants: true,
+    },
+    palette: {
+        primary: {
+            main: "#222",
+            type: 'dark'
+        }
+    }
+})
+
+ReactDOM.render(
+    <MuiThemeProvider theme={theme}>
+        <Router />
+    </MuiThemeProvider>
+    , document.getElementById('root'));

@@ -8,66 +8,74 @@ const styles = theme => ({
         display: "flex",
         flexDirection: "column",
         margin: '4px',
+        backgroundColor: '#000'
     },
     Media: {
-        height: "200px"
+        height: "200px",
+        marginBottom: 0,
+        paddingBottom: 0
     },
     hashTag: {
         color: '#EEEEEE',
         marginRight: '5px'
     },
-    titulo: {
-        fontFamily: 'Charmonman, cursive'
-    },
-    subtitulo: {
-        fontFamily: 'Charmonman, cursive',
-        paddingTop: '10px'
-    },
     dataAction: {
-        fontFamily: 'Charmonman, cursive',
         flexGrow: 1,
         padding: '5px'
-    },btnAction: {
-        fontFamily: 'Charmonman, cursive'
+    },
+    titulo: {
+        margin: 5
+    },
+    subtitulo: {
+        margin: 5
     }
 })
 
-const Cardi = props => {
-    const { classes } = props
+class Cardi extends React.Component {
 
-    return(
-        <Grid item xs={12} sm={4}>
-            <Card className={classes.root}>
-                <CardMedia
-                    className={classes.Media}
-                    image="https://www.corvomotion.com.br/public/main/assets/images/media/artigos/2017040607060558e6bbcdb2042/2017040607060558e6bbcdb2042.jpg"
-                >
-                    <Typography align="right" className={classes.hashTag}>
-                        <strong>#hashtag</strong>
-                    </Typography>
-                </CardMedia>
 
-                <CardContent>
-                    <Typography className={classes.titulo} align="center" variant="h4">
-                        Title 
-                    </Typography>
-                    <Divider />
-                    <Typography align="center" variant="h5" className={classes.subtitulo}>  
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris sit amet tellus in eros consequat venenatis.
-                    </Typography>
-                </CardContent>
-                
-                <Divider />
-                
-                <CardActions>
-                    <Typography className={classes.dataAction}>
-                        01/08/1993
-                    </Typography>
-                    <Button href="/paineladmin" className={classes.btnAction}>Veja Mais</Button>
-                </CardActions>
-            </Card>
-        </Grid>
-    )
+    goToAlbum(key) {
+        console.log('oi')
+    }
+
+    render() {
+
+        const { classes } = this.props
+
+        return (
+            <Grid item xs={12} sm={3}>
+                <Card className={classes.root}>
+                    <CardMedia
+                        className={classes.Media}
+                        image={this.props.imgcapa}
+                    >
+                        <Typography variant="subtitle2" align="right" className={classes.hashTag}>
+                            <span>#{this.props.hashtag}</span>
+                        </Typography>
+                    </CardMedia>
+
+                    <CardContent style={{ backgroundColor: '#FFF', marginTop: 0, paddingTop: 0, marginBottom: 0, paddingBottom: 0 }} >
+                        <Typography className={classes.titulo} align="center" variant="button">
+                            {this.props.titulo}
+                        </Typography>
+                        <Divider style={{ backgroundColor: '#dcdcdc' }} />
+                        <Typography align="center" variant="subtitle2" className={classes.subtitulo}>
+                            {this.props.desc}
+                        </Typography>
+                        <Divider style={{ backgroundColor: '#dcdcdc', marginTop: 5 }} />
+                    </CardContent>
+
+                    <CardActions style={{ backgroundColor: '#FFF', marginTop: 0, paddingTop: 0 }}>
+                        <Typography variant="body2" className={classes.dataAction}>
+                            {this.props.criadoEm}
+                        </Typography>
+                        <Button onClick={this.goToAlbum(this.props.key)}>Veja Mais</Button>
+                    </CardActions>
+                </Card>
+            </Grid>
+        )
+    }
 }
+
 
 export default withStyles(styles)(Cardi)
