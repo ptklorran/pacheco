@@ -62,17 +62,17 @@ class Content extends React.Component {
         const { classes } = this.props
 
         return (
-            <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', backgroundImage: '#000' }} >
+            <div style={{ display: 'flex', width: '100%', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', backgroundImage: '#1f1c18' }} >
                 <div className={classes.root}>
-                    <Grid md11 sm11 container>
+                    <Grid item md={12} sm={12}>
                         <Typography variant="subtitle2" className={classes.fontRecente}>
                             Recentes
-                    </Typography>
+                        </Typography>
                     </Grid>
                 </div>
                 <div className={classes.root}>
                     {this.state.albuns.map(
-                        item => <Cardi key={item.key} hashtag={item.hashtag} imgcapa={item.imgcapa} titulo={item.titulo} desc={item.desc} criadoEm={item.criadoEm} />
+                        item => <Cardi key={item.key} id={item.key} hashtag={item.hashtag} imgcapa={item.imgcapa} titulo={item.titulo} desc={item.desc} criadoEm={item.criadoEm} />
                     )}
                 </div>
             </div>

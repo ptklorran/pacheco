@@ -27,16 +27,12 @@ const styles = theme => ({
         margin: 5
     },
     subtitulo: {
-        margin: 5
+        margin: 5,
+        color: '#666'
     }
 })
 
 class Cardi extends React.Component {
-
-
-    goToAlbum(key) {
-        console.log('oi')
-    }
 
     render() {
 
@@ -58,18 +54,17 @@ class Cardi extends React.Component {
                         <Typography className={classes.titulo} align="center" variant="button">
                             {this.props.titulo}
                         </Typography>
-                        <Divider style={{ backgroundColor: '#dcdcdc' }} />
                         <Typography align="center" variant="subtitle2" className={classes.subtitulo}>
                             {this.props.desc}
                         </Typography>
                         <Divider style={{ backgroundColor: '#dcdcdc', marginTop: 5 }} />
                     </CardContent>
 
-                    <CardActions style={{ backgroundColor: '#FFF', marginTop: 0, paddingTop: 0 }}>
+                    <CardActions style={{ backgroundColor: '#FFF', marginTop: 0, paddingTop: 8 }}>
                         <Typography variant="body2" className={classes.dataAction}>
                             {this.props.criadoEm}
                         </Typography>
-                        <Button onClick={this.goToAlbum(this.props.key)}>Veja Mais</Button>
+                        <Button component="a" href={`/album/${this.props.id}`}>Veja Mais</Button>
                     </CardActions>
                 </Card>
             </Grid>

@@ -8,7 +8,7 @@ const styles = theme => ({
   root: {
     display: 'flex',
     flexDirection: 'column',
-    backgroundImage: '#000'
+    backgroundImage: '#1f1c18'
   },
   grow: {
     flexGrow: 1,
