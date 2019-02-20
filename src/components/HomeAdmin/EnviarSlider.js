@@ -52,6 +52,9 @@ class EnviarSlider extends React.Component {
               </Typography>
             </Toolbar>
           </AppBar>
+          <div>
+            teste
+          </div>
         </Dialog>
       </div>
     );

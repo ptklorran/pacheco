@@ -1,31 +1,55 @@
 import React from 'react'
-import "react-responsive-carousel/lib/styles/carousel.min.css";
-import { Carousel } from 'react-responsive-carousel';
-import { Button } from '@material-ui/core'
 import { withStyles } from '@material-ui/core/styles'
+import { Paper, IconButton, Typography } from '@material-ui/core'
+import { ArrowBack, Archive, CloudDownload } from '@material-ui/icons'
+import {saveAs} from 'file-saver'
 
 import { database } from '../services/Firebase'
 
 const styles = theme => ({
-    imagem: {
-        [theme.breakpoints.down('xs')]: {
-            width: '100%'
-        },
-        [theme.breakpoints.down('sm')]: {
-            width: '100%'
-        },
-        [theme.breakpoints.down('md')]: {
-            width: '60%'
-        },
-        [theme.breakpoints.down('lg')]: {
-            width: '55%'
-        }
+    root: {
+        display: 'flex',
+        flexDirection: 'column',
+        backgroundImage: 'linear-gradient(45deg, #000000, #000000)'
+    },
+    rootToolbar: {
+        display: 'flex',
+        height: '10vh',
+        width: '100%',
+        flexDirection: 'row',
+        alignItems: 'center'
+    },
+    FotosRollDivExterna: {
+        height: '20vh',
+        display: 'flex',
+        flexDirection: 'row',
+        alignItems: 'center',
+        backgroundColor: 'linear-gradient(45deg, #000000, #434343)'
+    },
+    FotosRollDivInterna: {
+        cursor: 'pointer',
+        backgroundColor: '#434343'
+    },
+    FotosRollImg: {
+        width: '100%',
+        borderRadius: '2px'
+    },
+    FotosRollDiv: {
+        width: '100%',
+        minHeight: '90vh',
+        display: 'flex',
+        flexDirection: 'row',
+        flexWrap: 'wrap',
+        justifyContent: 'center',
+        backgroundColor: 'linear-gradient(45deg, #000000, #434343)'
     }
 })
 
 class HomeAlbum extends React.Component {
     state = {
-        album: null
+        album: null,
+        fotoSelecionada: '',
+        indexFotoSelecionada: ''
     }
 
     getAlbum() {
@@ -35,7 +59,7 @@ class HomeAlbum extends React.Component {
         query.on('value', childSnapshot => {
             let item = childSnapshot.val()
             item['key'] = childSnapshot.key
-            this.setState({ album: item })
+            this.setState({ album: item, fotoSelecionada: item.imgcapa })
         })
     }
 
@@ -45,34 +69,53 @@ class HomeAlbum extends React.Component {
 
     render() {
 
+        const { album } = this.state
         const { classes } = this.props
 
-        const Sliders = () => {
-            if (this.state.album !== null) {
+        const saveImage = (item, index) => {
+            var img = new Image()
+            img.src = item
+            var file = new File([item], `${index}.jpeg`, { type: "image.*" })
+            saveAs(file)
+        }
+
+        const FotosRoll = () => {
+            if (album !== null) {
                 return (
-                    <Carousel>
-                        {
-                            this.state.album.linksDoAlbum.map(item => {
-                                return (
-                                    <div style={{}}>
-                                        <div style={{ height: '40px' }} >
-                                            <a href={item} download style={{ color: 'white' }}>Baixar Foto</a>
-                                        </div>
-                                        <img className={classes.imagem} src={item} alt={item} />
-                                    </div>
-                                )
-                            })
-                        }
-                    </Carousel>
+                    album.linksDoAlbum.map((item, index) => {
+                        return (
+                            <Paper style={{ width: '350px', padding: 5, margin: 5, backgroundColor: '#333' }} onClick={() => this.setState({ fotoSelecionada: item, indexFotoSelecionada: index })}>
+                                <img src={item} alt={item} className={classes.FotosRollImg} />
+                                <div style={{ width: '100%', display: 'flex', flexDirection: 'row', justifyContent: 'flex-end' }} >
+                                    <IconButton component="a" onClick={() => saveImage(item, index)} >
+                                        <Archive style={{ color: '#999' }} />
+                                    </IconButton>
+                                </div>
+                            </Paper>
+                        )
+                    })
                 )
             } else {
-                return <div />
+                return null
             }
         }
 
         return (
-            <div style={{ maxHeight: '100vh', width: '100%' }}>
-                <Sliders />
+            <div className={classes.root} >
+                <div className={classes.rootToolbar} >
+                    <IconButton onClick={() => this.props.history.push('/')}>
+                        <ArrowBack style={{ color: '#666' }} />
+                    </IconButton>
+                    <Typography align="center" variant="subtitle2" style={{ color: 'white', width: '100%' }}>
+                        {this.state.album !== null ? this.state.album.titulo : "Título"}
+                    </Typography>
+                    <IconButton onClick={() => { }}>
+                        <CloudDownload style={{ color: '#666' }} />
+                    </IconButton>
+                </div>
+                <div className={classes.FotosRollDiv}>
+                    <FotosRoll />
+                </div>
             </div>
         )
     }

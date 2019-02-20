@@ -1,21 +1,24 @@
 import React from 'react'
 import { withStyles } from '@material-ui/core/styles'
-import { IconButton, 
+import {
+    IconButton,
     Grid,
-    Typography,
-    Button
+    Chip,
+    Avatar,
+    Typography
 } from '@material-ui/core'
 
 import FaceIcon from '../../sources/facebook.png'
 import WhatsIcon from '../../sources/whatsapp.png'
 import InstaIcon from '../../sources/instagram.png'
+import Logo from '../../sources/logo_bonsai.png'
 
 const style = theme => ({
     heightIcon: {
         height: 30,
     },
     bgIconButton: {
-        backgroundColor: '666',
+        backgroundColor: '#f2f2f2',
         margin: 0,
         padding: 1,
         marginLeft: 10,
@@ -30,81 +33,75 @@ class Footer extends React.Component {
 
     render() {
 
-        const {classes} = this.props
+        const { classes } = this.props
 
         return (
-            <div style={{display: 'flex', alignItems: 'center', flexDirection: 'row', flexWrap: 'wrap', justifyContent: 'center', width: '100%', paddingTop: 32, paddingBottom: 32, backgroundColor: '#414345' }}>
-                <div style={{ width: '100%', display: 'flex', flexWrap: 'wrap', flexDirection: 'row', justifyContent: 'center', alignItems: 'center' }} >
-                    <Grid item xs={12} md={4}>
-                        <div style={{ width: '100%', display: 'flex', flexDirection: 'column', justifyContent: 'center', marginBottom: 20, backgroundColor: '#414345', alignItems: 'center' }} >
-                            <Typography variant="subtitle2" style={{ color: 'white' }} >
-                                Nos siga nas Redes Sociais
-                            </Typography>
+            <div style={{ height: '80vh', borderTop: '1px solid #666', display: 'flex', alignItems: 'center', flexDirection: 'column', flexWrap: 'wrap', justifyContent: 'center', width: '100%', paddingTop: 32, paddingBottom: 32, backgroundImage: 'linear-gradient(#f9d423, #e65c00)' }}>
+                <div style={{ width: '100%', display: 'flex', flexWrap: 'wrap', flexDirection: 'column', justifyContent: 'center', alignItems: 'center' }} >
+                    <Grid item xs={12} md={12}>
+                        <div style={{ width: '100%', display: 'flex', flexDirection: 'column', justifyContent: 'center', marginBottom: 20, alignItems: 'center' }} >
+                            
+                            <img src={Logo} height="130" alt="Logo" />
 
-                            <div style={{ width: '100%', display: 'flex', flexDirection: 'row', justifyContent: 'center', padding: 5, paddingRight: 0, paddingLeft: 0 }}>
-                                <IconButton 
+                            <div style={{ width: '100%', display: 'flex', flexDirection: 'row', justifyContent: 'center', padding: 5, paddingRight: 0, paddingLeft: 0, marginTop: 24 }}>
+                                <IconButton
                                     className={classes.bgIconButton}
                                     component="a"
                                     href="https://www.facebook.com/bonsaiproducoes/"
-                                    target="_blank"    
-                                > 
-                                    <img src={FaceIcon} className={ classes.heightIcon } alt="faceIcon" />
+                                    target="_blank"
+                                >
+                                    <img src={FaceIcon} className={classes.heightIcon} alt="faceIcon" />
                                 </IconButton>
-                                
-                                <IconButton 
+
+                                <IconButton
                                     component="a"
                                     href="https://www.instagram.com/bonsaiproducoes_"
                                     target="_blank"
-                                    className={classes.bgIconButton} > <img src={InstaIcon} className={ classes.heightIcon } alt="faceIcon" /> </IconButton>
-                                
-                                <IconButton 
+                                    className={classes.bgIconButton} > <img src={InstaIcon} className={classes.heightIcon} alt="faceIcon" /> </IconButton>
+
+                                <IconButton
                                     component="a"
                                     href="https://wa.me/5596991541808"
                                     target="_blank"
-                                    className={classes.bgIconButton} > <img src={WhatsIcon} className={ classes.heightIcon } alt="faceIcon" /> </IconButton>
+                                    className={classes.bgIconButton} > <img src={WhatsIcon} className={classes.heightIcon} alt="faceIcon" /> </IconButton>
                             </div>
 
                         </div>
                     </Grid>
+
+                </div>
+
+                <div style={{ marginTop: 24, paddingBottom: 10, justifyContent: 'space-between', width: 450, alignItems: 'center', bottom: 0, display: 'flex', flexDirection: 'row' }} >
                     
-                    <Grid item xs={12} md={4}>
-                        <div style={{ width: '100%', margin: 0, padding: 0, display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center' }} >
-                            <Typography variant="subtitle2" style={{ color: 'white' }} >
-                                Site
-                            </Typography>
-                            <div style={{ marginTop: 8, display: 'flex', flexDirection: 'column' }}>
-                                <Button
-                                    href="/loginvalidator"
-                                    style={{ color: '#fff', width: '100%' }}
-                                >
-                                    Login
-                                </Button>
-                                <Button
-                                    href="/loginvalidator"
-                                    style={{ color: '#fff', width: '100%' }}
-                                >
-                                    Pesquisar
-                                </Button>
-                                <Button
-                                    href="/loginvalidator"
-                                    style={{ color: '#fff', width: '100%' }}
-                                >
-                                    Todos os Albuns
-                                </Button>
-                            </div>
-                        </div>
-                    </Grid>
-            
-                    <Grid item xs={12} md={4}>
-                        <div style={{ width: '100%', display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center' }} >
-                            <Typography variant="subtitle2" style={{ color: 'white' }} >
-                                Contato
-                            </Typography>
-                        </div>
-                    </Grid>
+                    <Typography variant="subtitle2" >
+                        Desenvolvido Por 
+                    </Typography>
+                    <Chip
+                        avatar={
+                            <Avatar src="https://firebasestorage.googleapis.com/v0/b/fir-app-9f297.appspot.com/o/alxgiusti.PNG?alt=media&token=ca9566a5-cee9-41c9-bade-ecc23215c40c" alt="Programadora Front End"/>
+                    
+                        }
+                        label="Alexânia Giusti"
+                        variant="outlined"
+                        
+                    />
+
+                    <Typography variant="subtitle2">
+                        &
+                    </Typography>
+
+                    <Chip
+                        avatar={
+                            <Avatar src="https://firebasestorage.googleapis.com/v0/b/fir-app-9f297.appspot.com/o/ptk.PNG?alt=media&token=8b54294f-fc78-43b7-9ddf-4b373517b1b5" alt="Programadora Front End"/>
+                    
+                        }
+                        label="Patrick Ramos"
+                        variant="outlined"
+                        
+                    />
                     
                 </div>
-                
+
             </div>
         )
     }
