@@ -36,8 +36,8 @@ class Footer extends React.Component {
         const { classes } = this.props
 
         return (
-            <div style={{ height: '80vh', borderTop: '1px solid #666', display: 'flex', alignItems: 'center', flexDirection: 'column', flexWrap: 'wrap', justifyContent: 'center', width: '100%', paddingTop: 32, paddingBottom: 32, backgroundImage: 'linear-gradient(#f9d423, #e65c00)' }}>
-                <div style={{ width: '100%', display: 'flex', flexWrap: 'wrap', flexDirection: 'column', justifyContent: 'center', alignItems: 'center' }} >
+            <div style={{ height: '50vh', borderTop: '1px solid #666', display: 'flex', alignItems: 'center', flexDirection: 'column', justifyContent: 'center', width: '100%', paddingTop: 32, paddingBottom: 32, backgroundImage: 'linear-gradient(#f9d423, #e65c00)' }}>
+                <div style={{ width: '100%', display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center' }} >
                     <Grid item xs={12} md={12}>
                         <div style={{ width: '100%', display: 'flex', flexDirection: 'column', justifyContent: 'center', marginBottom: 20, alignItems: 'center' }} >
                             
@@ -71,11 +71,14 @@ class Footer extends React.Component {
 
                 </div>
 
-                <div style={{ marginTop: 24, paddingBottom: 10, justifyContent: 'space-between', width: 450, alignItems: 'center', bottom: 0, display: 'flex', flexDirection: 'row' }} >
+                <div style={{ marginTop: 24, paddingBottom: 10, justifyContent: 'center', width: '100%', alignItems: 'center', bottom: 0, display: 'flex', flexDirection: 'row' }} >
                     
                     <Typography variant="subtitle2" >
                         Desenvolvido Por 
                     </Typography>
+                    
+                </div>
+                <div style={{  paddingBottom: 10, justifyContent: 'center', width: '100%', alignItems: 'center', bottom: 0, display: 'flex', flexDirection: 'row' }} >
                     <Chip
                         avatar={
                             <Avatar src="https://firebasestorage.googleapis.com/v0/b/fir-app-9f297.appspot.com/o/alxgiusti.PNG?alt=media&token=ca9566a5-cee9-41c9-bade-ecc23215c40c" alt="Programadora Front End"/>
@@ -85,10 +88,9 @@ class Footer extends React.Component {
                         variant="outlined"
                         
                     />
-
-                    <Typography variant="subtitle2">
-                        &
-                    </Typography>
+                    
+                </div>
+                <div style={{paddingBottom: 10, flexWrap: 'wrap', justifyContent: 'center', width: '100%', alignItems: 'center', bottom: 0, display: 'flex', flexDirection: 'row' }} >
 
                     <Chip
                         avatar={

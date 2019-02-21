@@ -1,12 +1,18 @@
 import React from 'react'
 import { withStyles } from '@material-ui/core/styles'
-import { Paper, IconButton, Typography } from '@material-ui/core'
+import { Paper, IconButton, Typography, GridList, GridListTile } from '@material-ui/core'
 import { ArrowBack, Archive, CloudDownload } from '@material-ui/icons'
 import {saveAs} from 'file-saver'
 
 import { database } from '../services/Firebase'
 
 const styles = theme => ({
+    FotosRollsDiv: {
+        display: 'flex',
+        flexWrap: 'wrap',
+        justifyContent: 'space-around',
+        overflow: 'hidden',
+    },
     root: {
         display: 'flex',
         flexDirection: 'column',
@@ -87,11 +93,29 @@ class HomeAlbum extends React.Component {
                             <Paper style={{ width: '350px', padding: 5, margin: 5, backgroundColor: '#333' }} onClick={() => this.setState({ fotoSelecionada: item, indexFotoSelecionada: index })}>
                                 <img src={item} alt={item} className={classes.FotosRollImg} />
                                 <div style={{ width: '100%', display: 'flex', flexDirection: 'row', justifyContent: 'flex-end' }} >
-                                    <IconButton component="a" onClick={() => saveImage(item, index)} >
-                                        <Archive style={{ color: '#999' }} />
-                                    </IconButton>
+                                    {/** 
+                                        <IconButton component="a" onClick={() => saveImage(item, index)} >
+                                            <Archive style={{ color: '#999' }} />
+                                        </IconButton>
+                                    */}
                                 </div>
                             </Paper>
+                        )
+                    })
+                )
+            } else {
+                return null
+            }  
+        }
+
+        const ListTile = () => {
+            if (this.state.album !== null) {
+                return (
+                    this.state.album.linksDoAlbum.map(item => {
+                        return(
+                            <GridListTile cols={1} >
+                                <img src={item} alt={item} />
+                            </GridListTile>
                         )
                     })
                 )
@@ -114,7 +138,9 @@ class HomeAlbum extends React.Component {
                     </IconButton>
                 </div>
                 <div className={classes.FotosRollDiv}>
-                    <FotosRoll />
+                    <GridList cellHeight={160} styles={{ width: '100%' }} cols={5}>
+                        <ListTile />
+                    </GridList>
                 </div>
             </div>
         )
